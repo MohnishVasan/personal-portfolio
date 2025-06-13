@@ -1,0 +1,947 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mohnish Vasan - Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            scroll-behavior: smooth;
+            background-color: #f8f9fa;
+        }
+        
+        .nav-link {
+            position: relative;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -2px;
+            left: 0;
+            background-color: #6d28d9;
+            transition: width 0.3s;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .section-fade {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        
+        .section-fade.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        
+        .btn-primary {
+            background: linear-gradient(90deg, #6d28d9, #8b5cf6);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(109, 40, 217, 0.3);
+        }
+        
+        #progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #6d28d9, #8b5cf6);
+            z-index: 1000;
+            width: 0%;
+        }
+        
+        .timeline-item {
+            position: relative;
+            padding-left: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: #6d28d9;
+            z-index: 1;
+        }
+        
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            left: 5px;
+            top: 12px;
+            width: 2px;
+            height: calc(100% + 18px);
+            background-color: #e9ecef;
+        }
+        
+        .timeline-item:last-child::after {
+            display: none;
+        }
+        
+        .skill-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 10px;
+            background: linear-gradient(135deg, #6d28d9, #8b5cf6);
+            color: white;
+            font-size: 24px;
+            box-shadow: 0 4px 10px rgba(109, 40, 217, 0.3);
+        }
+    </style>
+</head>
+<body>
+    <div id="progress-bar"></div>
+    
+    <!-- Navigation -->
+    <nav class="bg-white shadow-md fixed w-full z-10">
+        <div class="container mx-auto px-8 py-3 flex justify-between items-center">
+            <a href="#" class="text-2xl font-bold text-violet-700">MV</a>
+            <div class="hidden md:flex space-x-6">
+                <a href="#about" class="nav-link text-gray-700 hover:text-violet-700 transition">About</a>
+                <a href="#education" class="nav-link text-gray-700 hover:text-violet-700 transition">Education</a>
+                <a href="#skills" class="nav-link text-gray-700 hover:text-violet-700 transition">Skills</a>
+                <a href="#experience" class="nav-link text-gray-700 hover:text-violet-700 transition">Experience</a>
+                <a href="#projects" class="nav-link text-gray-700 hover:text-violet-700 transition">Projects</a>
+                <a href="#certifications" class="nav-link text-gray-700 hover:text-violet-700 transition">Certifications</a>
+                <a href="#contact" class="nav-link text-gray-700 hover:text-violet-700 transition">Contact</a>
+            </div>
+            <button id="menu-btn" class="md:hidden text-gray-700 focus:outline-none">
+                <i class="fas fa-bars text-xl"></i>
+            </button>
+        </div>
+        <!-- Mobile menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white w-full py-2 px-8 shadow-md">
+            <div class="flex flex-col space-y-3">
+                <a href="#about" class="text-gray-700 hover:text-violet-700 transition">About</a>
+                <a href="#education" class="text-gray-700 hover:text-violet-700 transition">Education</a>
+                <a href="#skills" class="text-gray-700 hover:text-violet-700 transition">Skills</a>
+                <a href="#experience" class="text-gray-700 hover:text-violet-700 transition">Experience</a>
+                <a href="#projects" class="text-gray-700 hover:text-violet-700 transition">Projects</a>
+                <a href="#certifications" class="text-gray-700 hover:text-violet-700 transition">Certifications</a>
+                <a href="#contact" class="text-gray-700 hover:text-violet-700 transition">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="bg-gradient-to-r from-violet-700 to-fuchsia-500 text-white min-h-screen flex items-center pt-16 px-8">
+        <div class="container mx-auto px-4 py-16">
+            <div class="flex flex-col items-center justify-center text-center">
+                <h1 class="text-4xl md:text-5xl font-bold mb-4">Hi, I'm <span class="text-yellow-300">Mohnish Vasan</span></h1>
+                <p class="text-xl md:text-2xl mb-8">A Computer Science Student specializing in Artificial Intelligence and Data Science</p>
+                <div class="flex flex-wrap gap-4 justify-center">
+                    <a href="#contact" class="btn-primary px-6 py-3 rounded-full text-white font-medium">Contact Me</a>
+                    <a href="/Resume.pdf" download class="bg-white text-violet-700 px-6 py-3 rounded-full font-medium hover:bg-gray-100 transition flex items-center">
+                        <i class="fas fa-download mr-2"></i>
+                        Download Resume
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 bg-white section-fade">
+        <div class="container mx-auto px-8">
+            <h2 class="text-3xl font-bold text-center mb-12 text-gray-800">About Me</h2>
+            <div class="max-w-3xl mx-auto">
+                <p class="text-lg text-gray-600 leading-relaxed mb-8">
+                    Detail-oriented and proactive person with passion in technology, continuous learning, and delivering solutions through 
+                    collaborations, with experience in event coordination, workshop facilitation, and team management.
+                </p>
+                
+                <div class="flex justify-center mt-8 space-x-6">
+                    <a href="https://www.linkedin.com/in/mohnish-vasan-1ab07424a/" target="_blank" class="text-violet-600 hover:text-violet-800 transition flex items-center">
+                        <i class="fab fa-linkedin text-2xl mr-2"></i>
+                        <span>LinkedIn</span>
+                    </a>
+                    <a href="https://github.com/MohnishVasan" target="_blank" class="text-violet-600 hover:text-violet-800 transition flex items-center">
+                        <i class="fab fa-github text-2xl mr-2"></i>
+                        <span>GitHub</span>
+                    </a>
+                    <a href="mailto:vasanmohnish04@gmail.com" class="text-violet-600 hover:text-violet-800 transition flex items-center">
+                        <i class="fas fa-envelope text-2xl mr-2"></i>
+                        <span>Contact</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education Section -->
+    <section id="education" class="py-20 bg-gray-50 section-fade">
+        <div class="container mx-auto px-8">
+            <h2 class="text-3xl font-bold text-center mb-12 text-gray-800">Education</h2>
+            <div class="max-w-4xl mx-auto">
+                <div class="bg-white rounded-lg shadow-lg p-8 mb-8 relative">
+                    <div class="absolute top-0 left-0 w-2 h-full bg-violet-600 rounded-l-lg"></div>
+                    <div class="pl-4">
+                        <h3 class="text-2xl font-semibold text-gray-800">B.Tech in Computer Science (AI & Data Science)</h3>
+                        <p class="text-violet-600 font-medium mb-2">SASTRA University</p>
+                        <div class="flex items-center mb-4">
+                            <i class="fas fa-map-marker-alt text-gray-500 mr-2"></i>
+                            <span class="text-gray-500">Thanjavur, Tamil Nadu</span>
+                        </div>
+                        <p class="text-gray-600">
+                            Pursuing my degree with a focus on artificial intelligence and data science technologies.
+                            Developing strong foundations in programming, algorithms, and machine learning concepts.
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-lg shadow-lg p-8 relative">
+                    <div class="absolute top-0 left-0 w-2 h-full bg-violet-600 rounded-l-lg"></div>
+                    <div class="pl-4">
+                        <h3 class="text-2xl font-semibold text-gray-800">High School</h3>
+                        <p class="text-violet-600 font-medium mb-2">St. Francis De Sales School</p>
+                        <div class="flex items-center mb-4">
+                            <i class="fas fa-map-marker-alt text-gray-500 mr-2"></i>
+                            <span class="text-gray-500">New Delhi, Delhi</span>
+                        </div>
+                        <p class="text-gray-600">
+                            Completed high school education with a strong foundation in science and mathematics.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="py-20 bg-white section-fade">
+        <div class="container mx-auto px-8">
+            <h2 class="text-3xl font-bold text-center mb-12 text-gray-800">Skills</h2>
+            <div class="max-w-5xl mx-auto">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+                    <div>
+                        <h3 class="text-xl font-semibold mb-6 text-gray-700">Technical Skills</h3>
+                        
+                        <div class="grid grid-cols-2 sm:grid-cols-3 gap-8">
+                            <div class="flex flex-col items-center text-center">
+                                <div class="skill-icon">
+                                    <i class="fas fa-brain"></i>
+                                </div>
+                                <span class="text-gray-700 font-medium">Artificial Intelligence</span>
+                            </div>
+                            
+                            <div class="flex flex-col items-center text-center">
+                                <div class="skill-icon">
+                                    <i class="fas fa-cogs"></i>
+                                </div>
+                                <span class="text-gray-700 font-medium">Machine Learning</span>
+                            </div>
+                            
+                            <div class="flex flex-col items-center text-center">
+                                <div class="skill-icon">
+                                    <i class="fas fa-database"></i>
+                                </div>
+                                <span class="text-gray-700 font-medium">Database Management</span>
+                            </div>
+                            
+                            <div class="flex flex-col items-center text-center">
+                                <div class="skill-icon">
+                                    <i class="fab fa-python"></i>
+                                </div>
+                                <span class="text-gray-700 font-medium">Python</span>
+                            </div>
+                            
+                            <div class="flex flex-col items-center text-center">
+                                <div class="skill-icon">
+                                    <i class="fas fa-gamepad"></i>
+                                </div>
+                                <span class="text-gray-700 font-medium">Unity</span>
+                            </div>
+                            
+                            <div class="flex flex-col items-center text-center">
+                                <div class="skill-icon">
+                                    <i class="fas fa-calculator"></i>
+                                </div>
+                                <span class="text-gray-700 font-medium">MATLAB</span>
+                            </div>
+                            
+                            <div class="flex flex-col items-center text-center">
+                                <div class="skill-icon">
+                                    <i class="fab fa-html5"></i>
+                                </div>
+                                <span class="text-gray-700 font-medium">HTML</span>
+                            </div>
+                            
+                            <div class="flex flex-col items-center text-center">
+                                <div class="skill-icon">
+                                    <i class="fab fa-react"></i>
+                                </div>
+                                <span class="text-gray-700 font-medium">React</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <h3 class="text-xl font-semibold mb-6 text-gray-700">Soft Skills</h3>
+                        
+                        <div class="grid grid-cols-2 sm:grid-cols-3 gap-8">
+                            <div class="flex flex-col items-center text-center">
+                                <div class="skill-icon">
+                                    <i class="fas fa-users"></i>
+                                </div>
+                                <span class="text-gray-700 font-medium">Leadership</span>
+                            </div>
+                            
+                            <div class="flex flex-col items-center text-center">
+                                <div class="skill-icon">
+                                    <i class="fas fa-hands-helping"></i>
+                                </div>
+                                <span class="text-gray-700 font-medium">Teamwork</span>
+                            </div>
+                            
+                            <div class="flex flex-col items-center text-center">
+                                <div class="skill-icon">
+                                    <i class="fas fa-comments"></i>
+                                </div>
+                                <span class="text-gray-700 font-medium">Communication</span>
+                            </div>
+                            
+                            <div class="flex flex-col items-center text-center">
+                                <div class="skill-icon">
+                                    <i class="fas fa-sync-alt"></i>
+                                </div>
+                                <span class="text-gray-700 font-medium">Adaptability</span>
+                            </div>
+                            
+                            <div class="flex flex-col items-center text-center">
+                                <div class="skill-icon">
+                                    <i class="fas fa-clock"></i>
+                                </div>
+                                <span class="text-gray-700 font-medium">Time Management</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Languages Section -->
+    <section id="languages" class="py-20 bg-gray-50 section-fade">
+        <div class="container mx-auto px-8">
+            <h2 class="text-3xl font-bold text-center mb-12 text-gray-800">Languages</h2>
+            <div class="max-w-3xl mx-auto">
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-8">
+                    <div class="flex flex-col items-center text-center">
+                        <div class="skill-icon">
+                            <i class="fa-solid fa-e"></i>
+                        </div>
+                        <span class="text-gray-700 font-medium">English</span>
+                        <span class="text-gray-500 mt-1">Fluent</span>
+                    </div>
+                    
+                    <div class="flex flex-col items-center text-center">
+                        <div class="skill-icon">
+                            <i class="fa-solid fa-h"></i>
+                        </div>
+                        <span class="text-gray-700 font-medium">Hindi</span>
+                        <span class="text-gray-500 mt-1">Fluent</span>
+                    </div>
+                    
+                    <div class="flex flex-col items-center text-center">
+                        <div class="skill-icon">
+                            <i class="fa-solid fa-t"></i>
+                        </div>
+                        <span class="text-gray-700 font-medium">Tamil</span>
+                        <span class="text-gray-500 mt-1">Intermediate</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="py-20 bg-white section-fade">
+        <div class="container mx-auto px-8">
+            <h2 class="text-3xl font-bold text-center mb-12 text-gray-800">Leadership Experience</h2>
+            <div class="max-w-4xl mx-auto">
+                <div class="timeline-item">
+                    <div class="bg-white rounded-lg shadow-md p-6">
+                        <h3 class="text-xl font-semibold text-gray-800">Executive Coordinator</h3>
+                        <div class="flex items-center text-violet-600 mb-2">
+                            <span class="font-medium">Entrepreneurship Cell - SASTRA</span>
+                            <span class="mx-2">•</span>
+                            <span>Thanjavur, Tamil Nadu</span>
+                        </div>
+                        <div class="text-gray-500 mb-4">Jan 2023 - Present</div>
+                        <p class="text-gray-600">
+                            Full-time member of the Workshops Team, responsible for designing and conducting workshops for aspiring 
+                            entrepreneurs.
+                        </p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="bg-white rounded-lg shadow-md p-6">
+                        <h3 class="text-xl font-semibold text-gray-800">Organizer</h3>
+                        <div class="flex items-center text-violet-600 mb-2">
+                            <span class="font-medium">DAKSH - SASTRA</span>
+                            <span class="mx-2">•</span>
+                            <span>Thanjavur, Tamil Nadu</span>
+                        </div>
+                        <div class="text-gray-500 mb-4">Jan 2023 - Present</div>
+                        <p class="text-gray-600">
+                            Assist in organizing and overseeing the annual inter-college tech fest each year.
+                            Responsible for coordinating events, managing teams, and ensuring smooth execution of technical activities.
+                        </p>
+                    </div>
+                </div>
+                
+                
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-20 bg-gray-50 section-fade">
+        <div class="container mx-auto px-8">
+            <h2 class="text-3xl font-bold text-center mb-12 text-gray-800">Project Experience</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                <div class="card bg-white rounded-lg shadow-md overflow-hidden">
+                    <div class="h-40 bg-gradient-to-r from-violet-500 to-fuchsia-400 flex items-center justify-center">
+                        <i class="fas fa-user-circle text-5xl text-white"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-4">Personal Portfolio</h3>
+                        <p class="text-gray-600 mb-4">
+                            Highlights my skills and remarks on a web page. Designed and developed a responsive portfolio website to showcase my projects and abilities.
+                        </p>
+                        <!--<a href="https://portfolio.mohnishvasan.com" target="_blank" class="text-violet-600 hover:text-violet-800 transition flex items-center">
+                            <i class="fas fa-external-link-alt mr-2"></i>
+                            <span>View Project</span>
+                        </a>-->
+                    </div>
+                </div>
+                
+                <div class="card bg-white rounded-lg shadow-md overflow-hidden">
+                    <div class="h-40 bg-gradient-to-r from-violet-500 to-fuchsia-400 flex items-center justify-center">
+                        <i class="fas fa-image text-5xl text-white"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-4">Image Captioning</h3>
+                        <p class="text-gray-600 mb-4">
+                            Performs Image captioning using the help of Artificial Intelligence and Machine Learning. Developed a model that generates descriptive captions for images.
+                        </p>
+                        <a href="https://github.com/MohnishVasan/blip-image-captioning" target="_blank" class="text-violet-600 hover:text-violet-800 transition flex items-center">
+                            <i class="fas fa-external-link-alt mr-2"></i>
+                            <span>View Project</span>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="card bg-white rounded-lg shadow-md overflow-hidden">
+                    <div class="h-40 bg-gradient-to-r from-violet-500 to-fuchsia-400 flex items-center justify-center">
+                        <i class="fas fa-music text-5xl text-white"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-4">Music Recommender System</h3>
+                        <p class="text-gray-600 mb-4">
+                            Suggests a song based on the songs you have listened to with the help of Artificial Intelligence. Implemented collaborative filtering algorithms.
+                        </p>
+                        <!--<a href="https://github.com/mohnish-vasan/music-recommender" target="_blank" class="text-violet-600 hover:text-violet-800 transition flex items-center">
+                            <i class="fas fa-external-link-alt mr-2"></i>
+                            <span>View Project</span>
+                        </a>-->
+                    </div>
+                </div>
+                
+                <div class="card bg-white rounded-lg shadow-md overflow-hidden">
+                    <div class="h-40 bg-gradient-to-r from-violet-500 to-fuchsia-400 flex items-center justify-center">
+                        <i class="fas fa-robot text-5xl text-white"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-4">Chat-Bot</h3>
+                        <p class="text-gray-600 mb-4">
+                            A ready to talk chat-bot about Natural Language Processing. Designed to understand and respond to user queries in a conversational manner.
+                        </p>
+                        <a href="https://github.com/MohnishVasan/nlp_chat-bot" target="_blank" class="text-violet-600 hover:text-violet-800 transition flex items-center">
+                            <i class="fas fa-external-link-alt mr-2"></i>
+                            <span>View Project</span>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="card bg-white rounded-lg shadow-md overflow-hidden">
+                    <div class="h-40 bg-gradient-to-r from-violet-500 to-fuchsia-400 flex items-center justify-center">
+                        <i class="fas fa-gamepad text-5xl text-white"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-4">Linear Obstacle Game</h3>
+                        <p class="text-gray-600 mb-4">
+                            A simple obstacle game using Unity. Developed game mechanics, player controls, and obstacle generation systems.
+                        </p>
+                        <!--<a href="https://github.com/mohnish-vasan/linear-obstacle-game" target="_blank" class="text-violet-600 hover:text-violet-800 transition flex items-center">
+                            <i class="fas fa-external-link-alt mr-2"></i>
+                            <span>View Project</span>
+                        </a>-->
+                    </div>
+                </div>
+                
+                <div class="card bg-white rounded-lg shadow-md overflow-hidden">
+                    <div class="h-40 bg-gradient-to-r from-violet-500 to-fuchsia-400 flex items-center justify-center">
+                        <i class="fas fa-book text-5xl text-white"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-4">Library Management System</h3>
+                        <p class="text-gray-600 mb-4">
+                            A full database for tracking, and management of books, members etc. using MySQL. Implemented features for book checkout, returns, and inventory management.
+                        </p>
+                        <a href="https://github.com/MohnishVasan/library-management-system" target="_blank" class="text-violet-600 hover:text-violet-800 transition flex items-center">
+                            <i class="fas fa-external-link-alt mr-2"></i>
+                            <span>View Project</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Certifications Section -->
+    <section id="certifications" class="py-20 bg-white section-fade">
+        <div class="container mx-auto px-8">
+            <h2 class="text-3xl font-bold text-center mb-12 text-gray-800">Certifications</h2>
+            <div class="max-w-5xl mx-auto">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="card bg-white rounded-lg shadow-md p-6 border-t-4 border-violet-600">
+                        <div class="flex items-start">
+                            <div class="text-violet-600 mr-4">
+                                <i class="fas fa-certificate text-3xl"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-semibold mb-2">Machine Learning Specialization</h3>
+                                <p class="text-violet-600 mb-3">DeepLearning.AI</p>
+                                <ul class="text-gray-600 list-disc pl-5 space-y-1 mb-4">
+                                    <li>Supervised Machine Learning Algorithms: Classification and Regression</li>
+                                    <li>Advanced Learning Algorithms</li>
+                                    <li>Unsupervised Learning, Recommenders, Reinforcement Learning</li>
+                                </ul>
+                                <a href="https://www.coursera.org/account/accomplishments/specialization/8EVHWOT3449Y" target="_blank" class="text-violet-600 hover:text-violet-800 transition flex items-center">
+                                    <i class="fas fa-external-link-alt mr-2"></i>
+                                    <span>View Certificate</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="card bg-white rounded-lg shadow-md p-6 border-t-4 border-violet-600">
+                        <div class="flex items-start">
+                            <div class="text-violet-600 mr-4">
+                                <i class="fab fa-google text-3xl"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-semibold mb-2">GDCS GenAI Study Jam</h3>
+                                <p class="text-violet-600 mb-3">Google Developer Students Club</p>
+                                <p class="text-gray-600 mb-4">
+                                    Comprehensive training on generative AI technologies, applications, and development practices.
+                                </p>
+                                <a href="https://www.linkedin.com/in/mohnish-vasan-1ab07424a/details/certifications/1724509952589/single-media-viewer/?profileId=ACoAAD2W8xMBc_27SXirDPF_3n3szt-GrUxW5QU" target="_blank" class="text-violet-600 hover:text-violet-800 transition flex items-center">
+                                    <i class="fas fa-external-link-alt mr-2"></i>
+                                    <span>View Certificate</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="card bg-white rounded-lg shadow-md p-6 border-t-4 border-violet-600">
+                        <div class="flex items-start">
+                            <div class="text-violet-600 mr-4">
+                                <i class="fas fa-calculator text-3xl"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-semibold mb-2">AI for Industry Application</h3>
+                                <p class="text-violet-600 mb-3">MathWorks (MATLAB and Simulink)</p>
+                                <p class="text-gray-600 mb-4">
+                                    Applied AI techniques for solving industry-specific problems using MATLAB and Simulink.
+                                </p>
+                                <a href="https://www.linkedin.com/in/mohnish-vasan-1ab07424a/details/certifications/1724076090369/single-media-viewer/?profileId=ACoAAD2W8xMBc_27SXirDPF_3n3szt-GrUxW5QU" target="_blank" class="text-violet-600 hover:text-violet-800 transition flex items-center">
+                                    <i class="fas fa-external-link-alt mr-2"></i>
+                                    <span>View Certificate</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="card bg-white rounded-lg shadow-md p-6 border-t-4 border-violet-600">
+                        <div class="flex items-start">
+                            <div class="text-violet-600 mr-4">
+                                <i class="fas fa-calculator text-3xl"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-semibold mb-2">MATLAB Certifications</h3>
+                                <p class="text-violet-600 mb-3">MathWorks</p>
+                                <p class="text-gray-600 mb-4">
+                                    Proficiency in MATLAB programming, Machine Learning and Deep Learning.
+                                </p>
+                                <a href="https://matlabacademy.mathworks.com/progress/share/certificate.html?id=41be9222-e3e7-45c0-870c-2e7b0a113fa1&" target="_blank" class="text-violet-600 hover:text-violet-800 transition flex items-center">
+                                    <i class="fas fa-external-link-alt mr-2"></i>
+                                    <span>View Certificate</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="card bg-white rounded-lg shadow-md p-6 border-t-4 border-violet-600">
+                        <div class="flex items-start">
+                            <div class="text-violet-600 mr-4">
+                                <i class="fas fa-gamepad text-3xl"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-semibold mb-2">Unity Study Jam</h3>
+                                <p class="text-violet-600 mb-3">Developer Community SASTRA</p>
+                                <p class="text-gray-600 mb-4">
+                                    Game development fundamentals using Unity engine.
+                                </p>
+                                <a href="https://www.linkedin.com/in/mohnish-vasan-1ab07424a/details/certifications/1724509665986/single-media-viewer/?profileId=ACoAAD2W8xMBc_27SXirDPF_3n3szt-GrUxW5QU" target="_blank" class="text-violet-600 hover:text-violet-800 transition flex items-center">
+                                    <i class="fas fa-external-link-alt mr-2"></i>
+                                    <span>View Certificate</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="card bg-white rounded-lg shadow-md p-6 border-t-4 border-violet-600">
+                        <div class="flex items-start">
+                            <div class="text-violet-600 mr-4">
+                                <i class="fab fa-react text-3xl"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-semibold mb-2">React Study Jam</h3>
+                                <p class="text-violet-600 mb-3">Developer Community SASTRA</p>
+                                <p class="text-gray-600 mb-4">
+                                    Modern web development using React framework, state management, and component architecture.
+                                </p>
+                                <a href="https://www.linkedin.com/in/mohnish-vasan-1ab07424a/details/certifications/1749387765593/single-media-viewer/?profileId=ACoAAD2W8xMBc_27SXirDPF_3n3szt-GrUxW5QU" target="_blank" class="text-violet-600 hover:text-violet-800 transition flex items-center">
+                                    <i class="fas fa-external-link-alt mr-2"></i>
+                                    <span>View Certificate</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="card bg-white rounded-lg shadow-md p-6 border-t-4 border-violet-600">
+                        <div class="flex items-start">
+                            <div class="text-violet-600 mr-4">
+                                <i class="fas fa-shield-alt text-3xl"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-semibold mb-2">Cyber Security and Privacy</h3>
+                                <p class="text-violet-600 mb-3">NPTEL</p>
+                                <p class="text-gray-600 mb-4">
+                                    Fundamentals of cyber security, threat detection, and privacy protection strategies.
+                                </p>
+                                <a href="https://www.linkedin.com/in/mohnish-vasan-1ab07424a/details/certifications/1749388214827/single-media-viewer/?profileId=ACoAAD2W8xMBc_27SXirDPF_3n3szt-GrUxW5QU" target="_blank" class="text-violet-600 hover:text-violet-800 transition flex items-center">
+                                    <i class="fas fa-external-link-alt mr-2"></i>
+                                    <span>View Certificate</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="card bg-white rounded-lg shadow-md p-6 border-t-4 border-violet-600">
+                        <div class="flex items-start">
+                            <div class="text-violet-600 mr-4">
+                                <i class="fas fa-shield-alt text-3xl"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-semibold mb-2">Privacy and Security in Online Social Media</h3>
+                                <p class="text-violet-600 mb-3">NPTEL</p>
+                                <p class="text-gray-600 mb-4">
+                                    Advanced concepts in social media security, data protection, and privacy preservation techniques.
+                                </p>
+                                <a href="https://www.linkedin.com/in/mohnish-vasan-1ab07424a/details/certifications/1749388280434/single-media-viewer/?profileId=ACoAAD2W8xMBc_27SXirDPF_3n3szt-GrUxW5QU" target="_blank" class="text-violet-600 hover:text-violet-800 transition flex items-center">
+                                    <i class="fas fa-external-link-alt mr-2"></i>
+                                    <span>View Certificate</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 bg-gray-50 section-fade">
+        <div class="container mx-auto px-8">
+            <h2 class="text-3xl font-bold text-center mb-4 text-gray-800">Let's Connect</h2>
+            <p class="text-center text-gray-600 mb-12 max-w-2xl mx-auto">
+                I'm always open to discussing new projects, creative ideas or opportunities to be part of your vision.
+            </p>
+            
+            <div class="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-white rounded-lg p-8 shadow-md">
+                    <h3 class="text-xl font-semibold mb-6 text-gray-800">Contact Information</h3>
+                    
+                    <div class="flex items-start mb-6">
+                        <div class="text-violet-600 mr-4">
+                            <i class="fas fa-envelope text-xl"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-medium text-gray-700">Email</h4>
+                            <a href="mailto:vasanmohnish04@gmail.com" class="text-violet-600 hover:text-violet-800 transition">vasanmohnish04@gmail.com</a>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-start mb-6">
+                        <div class="text-violet-600 mr-4">
+                            <i class="fas fa-phone text-xl"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-medium text-gray-700">Phone</h4>
+                            <a href="tel:+919899977832" class="text-violet-600 hover:text-violet-800 transition">+91 98999 77832</a>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-start mb-6">
+                        <div class="text-violet-600 mr-4">
+                            <i class="fab fa-linkedin text-xl"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-medium text-gray-700">LinkedIn</h4>
+                            <a href="https://www.linkedin.com/in/mohnish-vasan-1ab07424a/" target="_blank" class="text-violet-600 hover:text-violet-800 transition">linkedin.com/in/mohnish-vasan-1ab07424a</a>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-start">
+                        <div class="text-violet-600 mr-4">
+                            <i class="fab fa-github text-xl"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-medium text-gray-700">GitHub</h4>
+                            <a href="https://github.com/MohnishVasan" target="_blank" class="text-violet-600 hover:text-violet-800 transition">github.com/MohnishVasan</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-lg p-8 shadow-md">
+                    <h3 class="text-xl font-semibold mb-6 text-gray-800">Send Me a Message</h3>
+
+                    <form id="contact-form" name="submit-to-google-sheet" class="space-y-4">
+                        <div>
+                            <label for="name" class="block text-gray-700 mb-2">Your Name</label>
+                            <input type="text" name="name" id="name" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-violet-500" required>
+                        </div>
+                        
+                        <div>
+                            <label for="email" class="block text-gray-700 mb-2">Your Email</label>
+                            <input type="email" name="email" id="email" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-violet-500" required>
+                        </div>
+                        
+                        <div>
+                            <label for="message" class="block text-gray-700 mb-2">Message</label>
+                            <textarea id="message" name="message" rows="4" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-violet-500"></textarea>
+                        </div>
+                        
+                        <button type="submit" class="btn-primary w-full py-3 rounded-md text-white font-medium">Send Message</button>
+                    </form>
+                    <script>
+                        const scriptURL = 'https://script.google.com/macros/s/AKfycbzC6hQoUy-osSz7T1dRmRbWMdmH-7VtPUolj-Ef1S2f3gtzVmoIBQ4xSQKav9c2VpbBrg/exec'
+                        const form = document.forms['submit-to-google-sheet']
+
+                        form.addEventListener('submit', e => {
+                            e.preventDefault()
+                            fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+                            .then(response => console.log('Success!', response))
+                            .catch(error => console.error('Error!', error.message))
+                        })
+                    </script>
+                    <div id="form-message" class="mt-4 text-center hidden"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-10">
+        <div class="container mx-auto px-8">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-6 md:mb-0">
+                    <h2 class="text-2xl font-bold">Mohnish Vasan</h2>
+                    <p class="text-gray-400">Computer Science Student (AI & DS)</p>
+                </div>
+                
+                <div class="flex space-x-6">
+                    <a href="https://github.com/MohnishVasan" target="_blank" class="text-gray-400 hover:text-white transition">
+                        <i class="fab fa-github text-xl"></i>
+                    </a>
+                    <a href="https://www.linkedin.com/in/mohnish-vasan-1ab07424a/" target="_blank" class="text-gray-400 hover:text-white transition">
+                        <i class="fab fa-linkedin text-xl"></i>
+                    </a>
+                    <a href="mailto:vasanmohnish04@gmail.com" class="text-gray-400 hover:text-white transition">
+                        <i class="fas fa-envelope text-xl"></i>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
+                <p>&copy; 2025 Mohnish Vasan. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button id="back-to-top" class="fixed bottom-6 right-6 bg-violet-600 text-white w-12 h-12 rounded-full flex items-center justify-center shadow-lg opacity-0 invisible transition-all duration-300">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <script>
+        // Mobile menu toggle
+        const menuBtn = document.getElementById('menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 70,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Close mobile menu if open
+                    if (!mobileMenu.classList.contains('hidden')) {
+                        mobileMenu.classList.add('hidden');
+                    }
+                }
+            });
+        });
+        
+        // Section fade-in animation
+        const sections = document.querySelectorAll('.section-fade');
+        
+        function checkSections() {
+            const triggerBottom = window.innerHeight * 0.8;
+            
+            sections.forEach(section => {
+                const sectionTop = section.getBoundingClientRect().top;
+                
+                if (sectionTop < triggerBottom) {
+                    section.classList.add('visible');
+                }
+            });
+        }
+        
+        // Back to top button
+        const backToTopBtn = document.getElementById('back-to-top');
+        
+        function toggleBackToTopButton() {
+            if (window.scrollY > 300) {
+                backToTopBtn.classList.remove('opacity-0', 'invisible');
+                backToTopBtn.classList.add('opacity-100', 'visible');
+            } else {
+                backToTopBtn.classList.remove('opacity-100', 'visible');
+                backToTopBtn.classList.add('opacity-0', 'invisible');
+            }
+        }
+        
+        backToTopBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+        
+        // Progress bar
+        const progressBar = document.getElementById('progress-bar');
+        
+        function updateProgressBar() {
+            const scrollPosition = window.scrollY;
+            const totalHeight = document.body.scrollHeight - window.innerHeight;
+            const progress = (scrollPosition / totalHeight) * 100;
+            
+            progressBar.style.width = `${progress}%`;
+        }
+        
+        // Contact form handling
+        const contactForm = document.getElementById('contact-form');
+        const formMessage = document.getElementById('form-message');
+        
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            // Demo form submission
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const message = document.getElementById('message').value;
+            
+            if (!name || !email || !message) {
+                formMessage.textContent = 'Please fill in all fields.';
+                formMessage.className = 'mt-4 text-center text-red-600';
+                formMessage.classList.remove('hidden');
+                return;
+            }
+            
+            // In a real application, you would send this data to a server
+            // For demo purposes, we'll just show a success message
+            contactForm.reset();
+            formMessage.textContent = 'Thank you for your message! I will get back to you soon.';
+            formMessage.className = 'mt-4 text-center text-green-600';
+            formMessage.classList.remove('hidden');
+            
+            // Hide the message after 5 seconds
+            setTimeout(() => {
+                formMessage.classList.add('hidden');
+            }, 5000);
+        });
+        
+        // Event listeners
+        window.addEventListener('scroll', () => {
+            checkSections();
+            toggleBackToTopButton();
+            updateProgressBar();
+        });
+        
+        // Initial check
+        checkSections();
+        toggleBackToTopButton();
+        updateProgressBar();
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'949ecec757549367',t:'MTc0ODk0OTY5NS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
